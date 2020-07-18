@@ -1,0 +1,32 @@
+[tasks.backend]
+command = "cargo"
+args = ["run"]
+workspace = false
+
+[tasks.watch-backend]
+command = "cargo"
+args = ["run"]
+watch = { watch = ["./backend/", "./shared-lib/"] }
+workspace = false
+
+[tasks.frontend]
+command = "elm"
+args = ["make", "frontend/Main.elm", "--output", "web/elm.js"]
+workspace = false
+
+[tasks.watch-frontend]
+command = "elm"
+args = ["make", "frontend/Main.elm", "--output", "web/elm.js"]
+watch = { watch = ["./frontend/"] }
+workspace = false
+
+[tasks.shared-lib]
+command = "wasm-pack"
+args = ["build", "--target", "web", "shared-lib", "--out-dir", "../web/shared-lib/", "--no-typescript"]
+workspace = false
+
+[tasks.watch-shared-lib]
+command = "wasm-pack"
+args = ["build", "--target", "web", "shared-lib", "--out-dir", "../web/shared-lib/"]
+watch = { watch = ["./shared-lib/"] }
+workspace = false
